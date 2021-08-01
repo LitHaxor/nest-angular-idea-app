@@ -1,4 +1,5 @@
-import { Controller, Body, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Controller, Body, Delete, Get, Param, Post, Put, UsePipes } from "@nestjs/common";
+import { ValidationPipe } from "src/v1/utils/validations/validation.pipe";
 import { CreateIdeaDto } from "../dtos/CreateIdea.dto";
 import { UpdateIdeaDtos } from "../dtos/UpdateIdea.dto";
 import { IdeaServices } from "../services/idea.service";
@@ -13,6 +14,7 @@ export class IdeaController {
     }
 
     @Post()
+    @UsePipes(new ValidationPipe())
     createIdea(@Body() createIdeaDto: CreateIdeaDto) {
         return this.ideaService.createIdea(createIdeaDto);
     }
