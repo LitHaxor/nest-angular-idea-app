@@ -1,4 +1,4 @@
-import { Controller, Body, Delete, Get, Param, Post, Put, UsePipes } from "@nestjs/common";
+import { Controller, Body, Delete, Get, Param, Post, Put, UsePipes, UseGuards } from "@nestjs/common";
 import { ValidationPipe } from "src/utils/validations/validation.pipe";
 import { CreateIdeaDto } from "../dtos/CreateIdea.dto";
 import { UpdateIdeaDtos } from "../dtos/UpdateIdea.dto";
