@@ -1,7 +1,8 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, } from "typeorm";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Logger } from "@nestjs/common";
+import { IdeaEntity } from "src/v1/ideas/entity/idea.entity";
 
 @Entity('Users')
 export class UserEntity {
@@ -16,6 +17,10 @@ export class UserEntity {
 
     @CreateDateColumn()
     createdAt: Date;
+
+
+    @OneToMany(type => IdeaEntity, idea => idea.author )
+    ideas: IdeaEntity[];
 
     @BeforeInsert()
     async hashPassword() {
