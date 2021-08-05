@@ -8,22 +8,22 @@ import { IdeaModule } from "../ideas/idea.module";
 import { LoggingInterceptor } from "../../utils/loggin.interceptor";
 import { UserModule } from "../user/user.module";
 
-
 @Module({
     imports: [
         ConfigModule.forRoot(),
         TypeOrmModule.forRoot(config),
         IdeaModule,
-        UserModule
+        UserModule,
     ],
-    providers: [{
-        provide: APP_FILTER,
-        useClass: HttpErrorFilter
-    },
-    {
-        provide: APP_INTERCEPTOR,
-        useClass: LoggingInterceptor
-    }
-    ]
+    providers: [
+        {
+            provide: APP_FILTER,
+            useClass: HttpErrorFilter,
+        },
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: LoggingInterceptor,
+        },
+    ],
 })
-export class V1AppModule { }
+export class V1AppModule {}

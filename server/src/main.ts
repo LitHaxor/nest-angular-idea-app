@@ -12,6 +12,6 @@ async function bootstrap() {
         new FastifyAdapter(),
     );
     await app.listen(port);
-    Logger.warn(`Server running on http://localhost:${port}`, 'Server Started');
+    Logger.warn(`Server running on http://localhost:${port}`, "Server Started");
 }
 bootstrap();

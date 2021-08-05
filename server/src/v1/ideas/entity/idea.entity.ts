@@ -3,6 +3,8 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -10,21 +12,29 @@ import {
 
 @Entity("idea")
 export class IdeaEntity {
-    @PrimaryGeneratedColumn() 
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @CreateDateColumn() 
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn() 
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @Column("text") 
+    @Column("text")
     description: string;
 
-    @Column("text") 
+    @Column("text")
     idea: string;
-    
-    @ManyToOne(type=> UserEntity, author => author.ideas)
+
+    @ManyToMany((type) => UserEntity, { cascade: true })
+    @JoinTable()
+    upvotes: UserEntity[];
+
+    @ManyToMany((type) => UserEntity, { cascade: true })
+    @JoinTable()
+    downvotes: UserEntity[];
+
+    @ManyToOne((type) => UserEntity, (author) => author.ideas)
     author: UserEntity;
 }
